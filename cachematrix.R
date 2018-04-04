@@ -15,8 +15,9 @@ makeCacheMatrix <- function(m = matrix()) {
 }
 
 
-## Checks if the matrix's inverse has already been calculated and return it
-# otherwise, calculates it and stores it in the cache via setinv function
+# Checks if special matrix's inverse has already been calculated and return it
+# otherwise (if matrix is invertible) it calculates it and stores it in the
+# cache via setinv function
 cacheSolve <- function(m, ...) {
     minv <- m$getinv()
     if(!is.null(minv)) {
@@ -24,7 +25,11 @@ cacheSolve <- function(m, ...) {
         return(minv)
     }
     data <- m$get()
-    minv <- solve(data)
-    m$setinv(minv)
-    minv
+    # need to check that matrix is convertible...
+    if(det(data)==0) message("non invertible matrix")
+    else {
+        minv <- solve(data)
+        m$setinv(minv)
+        minv
+    }
 }
