@@ -1,6 +1,5 @@
-## Creates special matrix (~ a list) containing functions to
-#   - set / get the value of the matrix
-#   - set / get the inverse of the matrix
+# Creates a special matrix (~ a list) containing a matrix m, 
+# its cached inverse minv and functions to get / set their values
 makeCacheMatrix <- function(m = matrix()) {
     minv <- NULL
     set <- function(new_val) {
@@ -16,8 +15,8 @@ makeCacheMatrix <- function(m = matrix()) {
 }
 
 
-## Checks if special matrix's inverse has already been calculated and return it
-# otherwise, calculates it and stores it  in the cache via setinv function
+## Checks if the matrix's inverse has already been calculated and return it
+# otherwise, calculates it and stores it in the cache via setinv function
 cacheSolve <- function(m, ...) {
     minv <- m$getinv()
     if(!is.null(minv)) {
